@@ -12,7 +12,6 @@ namespace SpreetailWorkSampleDavidOBrien
         MEMBEREXISTS,
         MEMBERS,
         REMOVE,
-        REMOVEALL,
-        GETINTERSECTVALUESFORKEYS
+        REMOVEALL
     }
 }

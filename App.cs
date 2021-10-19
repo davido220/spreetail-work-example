@@ -106,9 +106,6 @@ namespace SpreetailWorkSampleDavidOBrien
                 case CommandEnum.REMOVEALL:
                     results.AddRange(RemoveAll(key));
                     break;
-                case CommandEnum.GETINTERSECTVALUESFORKEYS:
-                    results.AddRange(GetIntersectValuesForKey(new List<string>{ key }));
-                    break;
                 default:
                     results.Add(SC.INVALID_COMMAND);
                     break;
@@ -118,45 +115,6 @@ namespace SpreetailWorkSampleDavidOBrien
         }
 
         #region execute-commands
-
-        public List<Tuple<string, string>> GetIntersectValuesForKey(List<string> keys)
-        {
-            var results = new List<string>();
-
-            var myColl = new List<Tuple<string, string>>();
-
-            foreach (var item in appMultiValueDictionary.Items.Where(o => keys.Contains(o.Key)))
-            {
-                foreach (var value in item.Values)
-                {
-                    myColl.Add(new Tuple<string, string>(item.Key, value));
-                }
-            }
-
-            var myColl2 = new List<Tuple<string, string>>();
-            
-            foreach (var item in myColl)
-            {
-                if (myColl.Where(o => o.Item2 == item.Item2 && o.Item1 != item.Item1).Any())
-                {
-                    myColl2.Add(item);
-                }
-            }
-
-            var myColl3 = new List<Tuple<string, string>>();
-            
-            foreach(var item in myColl2)
-            {
-                if (!myColl3.Contains(item))
-                {
-                    myColl3.Add(item);
-                }
-            }
-
-            myColl3 = myColl3.OrderBy(o => o.Item1).OrderBy(o => o.Item2).ToList();
-
-            return myColl3;
-        }
 
         // Adds a member to a collection for a given key. Displays an error if the member already exists for the key.
         public List<string> Add(string key, string value)
